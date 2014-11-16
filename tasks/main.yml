@@ -1,0 +1,8 @@
+---
+# tasks file for ajsalminen.ssh_config
+- name: Write base config template for ssh_config.
+  template:
+    src: ssh_config_base.j2
+    dest: "{{ ssh_config_fragment_path }}/00_base"
+  notify:
+    - Rewrite ssh_config
