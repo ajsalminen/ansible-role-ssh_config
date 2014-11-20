@@ -14,5 +14,11 @@
   template:
     src: ssh_config_base.j2
     dest: "{{ ssh_config_fragment_path }}/00_base"
-  notify:
-    - Assemble ssh_config from fragments.
+
+- name: Assemble ssh_config from fragments.
+  assemble:
+    src: "{{ ssh_config_fragment_path }}"
+    dest: "{{ ssh_config_path }}/ssh_config"
+    owner: root
+    group: root
+    mode: 0644
