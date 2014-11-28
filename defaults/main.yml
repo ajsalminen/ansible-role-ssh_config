@@ -2,3 +2,4 @@
 # defaults file for ajsalminen.ssh_config
 ssh_config_path: /etc/ssh
 ssh_config_fragment_path: "{{ ssh_config_path }}/config.d"
+ssh_config_hosts: []

@@ -15,6 +15,15 @@
     src: ssh_config_base.j2
     dest: "{{ ssh_config_fragment_path }}/00_base"
 
+# TODO: better fragment naming.
+- name: Write host entries.
+  template:
+    src: ssh_config_host.j2
+    dest: "{{ ssh_config_fragment_path }}/{{item.name|default(item.host|regex_replace('[^A-Za-z0-9]'))}}"
+  with_items:
+    ssh_config_hosts
+
+
 - name: Assemble ssh_config from fragments.
   assemble:
     src: "{{ ssh_config_fragment_path }}"
