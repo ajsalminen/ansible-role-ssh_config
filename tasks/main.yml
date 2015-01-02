@@ -8,6 +8,7 @@
     owner: root
     group: root
     mode: 0700
+  always_run: yes
 
 
 - name: Write base config template for ssh_config.
