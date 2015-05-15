@@ -3,3 +3,6 @@
 ssh_config_path: /etc/ssh
 ssh_config_fragment_path: "{{ ssh_config_path }}/config.d"
 ssh_config_hosts: []
+ssh_config_user: root
+ssh_config_group: root
+ssh_config_file: ssh_config

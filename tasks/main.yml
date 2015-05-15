@@ -5,8 +5,8 @@
   file:
     path: "{{ ssh_config_fragment_path }}"
     state: directory
-    owner: root
-    group: root
+    owner: "{{ssh_config_user}}"
+    group: "{{ssh_config_group}}"
     mode: 0700
   always_run: yes
 
@@ -28,7 +28,7 @@
 - name: Assemble ssh_config from fragments.
   assemble:
     src: "{{ ssh_config_fragment_path }}"
-    dest: "{{ ssh_config_path }}/ssh_config"
-    owner: root
-    group: root
+    dest: "{{ ssh_config_path }}/{{ssh_config_file}}"
+    owner: "{{ssh_config_user}}"
+    group: "{{ssh_config_group}}"
     mode: 0644
