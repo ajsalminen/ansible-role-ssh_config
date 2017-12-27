@@ -8,7 +8,7 @@
     owner: "{{ssh_config_user}}"
     group: "{{ssh_config_group}}"
     mode: 0700
-  always_run: yes
+  check_mode: no
 
 
 - name: Write base config template for ssh_config.
