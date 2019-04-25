@@ -1,34 +1,13 @@
 ---
-# tasks file for ajsalminen.ssh_config
-
-- name: Ensure config.d exists
-  file:
-    path: "{{ ssh_config_fragment_path }}"
-    state: directory
-    owner: "{{ssh_config_user}}"
-    group: "{{ssh_config_group}}"
-    mode: 0700
-  check_mode: no
-
-
-- name: Write base config template for ssh_config.
+- name: Write config template for ssh_config.
   template:
-    src: ssh_config_base.j2
-    dest: "{{ ssh_config_fragment_path }}/00_base"
-
-# TODO: better fragment naming.
-- name: Write host entries.
-  template:
-    src: ssh_config_host.j2
-    dest: "{{ ssh_config_fragment_path }}/{{item.name|default(item.host|regex_replace('[^A-Za-z0-9]'))}}"
-  with_items:
-    " {{ ssh_config_hosts }}"
-
-
-- name: Assemble ssh_config from fragments.
-  assemble:
-    src: "{{ ssh_config_fragment_path }}"
-    dest: "{{ ssh_config_path }}/{{ssh_config_file}}"
-    owner: "{{ssh_config_user}}"
-    group: "{{ssh_config_group}}"
+    src: ssh_config.j2
+    dest: "{{ ssh_config_path }}/{{ ssh_config_file }}"
+    owner: "{{ ssh_config_user }}"
+    group: "{{ ssh_config_group }}"
     mode: 0644
+
+- name: Remove old config.d directory
+  file:
+    path: "{{ ssh_config_path }}/config.d"
+    state: absent
